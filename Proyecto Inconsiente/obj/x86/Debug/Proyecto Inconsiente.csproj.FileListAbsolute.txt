@@ -1,0 +1,9 @@
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto Inconsiente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\OpenTK.dll.config
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto Inconsiente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\Proyecto Inconsiente.exe
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto Inconsiente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\Proyecto Inconsiente.pdb
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto Inconsiente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\MonoGame.Framework.dll
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto Inconsiente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\NVorbis.dll
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto Inconsiente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\OpenTK.dll
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto Inconsiente\Proyecto Inconsiente\obj\x86\Debug\Proyecto Inconsiente.csprojResolveAssemblyReference.cache
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto Inconsiente\Proyecto Inconsiente\obj\x86\Debug\Proyecto Inconsiente.exe
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto Inconsiente\Proyecto Inconsiente\obj\x86\Debug\Proyecto Inconsiente.pdb
