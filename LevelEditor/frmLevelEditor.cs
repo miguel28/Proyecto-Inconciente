@@ -202,6 +202,8 @@ namespace LevelEditor
             if (editingLevel == null)
                 return;
 
+            Draw.DrawGrid(e.Graphics, e.ClipRectangle, editingLevel.GridSize);
+
             if (!Helpers.IsRectangleNull(UnitRectangle) && TileSelection != null)
             {
                 Graphics g = e.Graphics;
@@ -279,20 +281,67 @@ namespace LevelEditor
                 EnableEditing(true);
             }
         }
-        
+
         private void openLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Level Files (xml)| *.xml";
+            DialogResult result = dialog.ShowDialog();
 
+            if (DialogResult.OK == result)
+            {
+                editingLevel = Level.LoadLevel(dialog.FileName);
+                UpdateLayersList();
+                RedrawAllMap();
+                EnableEditing(true);
+            }
         }
 
         private void closeLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            editingLevel = null;
+            System.GC.Collect();
+            EnableEditing(true);
         }
 
         private void saveLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (editingLevel != null)
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.Filter = "Level Files (xml)| *.xml";
+                DialogResult result = dialog.ShowDialog();
 
+                if(DialogResult.OK == result)
+                {
+                    editingLevel.SaveLevel(dialog.FileName);
+                }
+            }
+        }
+
+        private void btnSaveImage_Click(object sender, EventArgs e)
+        {
+            if (editingLevel != null)
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.Filter = "Image PNG|*.png";
+                DialogResult result = dialog.ShowDialog();
+
+                if (DialogResult.OK == result)
+                    editingLevel.SaveMapAsImage(dialog.FileName);
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void levelPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            diaLevelProperties dialog = new diaLevelProperties(editingLevel);
+            dialog.ShowDialog();
+            editingLevel = dialog.edLevel;
         }
 
         private void EnableEditing(bool en)
@@ -303,6 +352,7 @@ namespace LevelEditor
             openLevelToolStripMenuItem.Enabled = !en;
             closeLevelToolStripMenuItem.Enabled = en;
             saveLevelToolStripMenuItem.Enabled = en;
+            levelPropertiesToolStripMenuItem.Enabled = en;
         }
         #endregion
     }

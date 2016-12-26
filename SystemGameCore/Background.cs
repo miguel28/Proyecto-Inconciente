@@ -4,13 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace SystemGameCore
 {
     public class Background
     {
+        [XmlIgnore]
         public Image BitmapImage;
+
+        [XmlIgnore]
         public bool Visible = true;
+
+        public Background()
+        {
+
+        }
 
         /// <summary>
         /// 

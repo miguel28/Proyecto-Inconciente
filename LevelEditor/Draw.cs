@@ -40,6 +40,23 @@ namespace LevelEditor
             }
         }
 
+        public static void DrawGrid(Graphics g, Rectangle clip, Size grid)
+        {
+            float[] dashValues = { 5, 2, 15, 4 };
+            Pen blackPen = new Pen(Color.Black, 0.5f);
+            blackPen.DashPattern = dashValues;
+
+            for (int i = 0; i < clip.Height; i += grid.Width)
+            {
+                g.DrawLine(blackPen, new Point(0, i), new Point(clip.Width, i));
+            }
+
+            for (int i = 0; i < clip.Width; i += grid.Width)
+            {
+                g.DrawLine(blackPen, new Point(i, 0), new Point(i, clip.Width));
+            }
+        }
+
         public static Image ReplaceColor(Image img, Color find, Color replace)
         {
             Bitmap bmp = (Bitmap)img;

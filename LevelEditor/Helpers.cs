@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace LevelEditor
 {
@@ -71,6 +73,22 @@ namespace LevelEditor
         public static Rectangle CloneRectangle(Rectangle src)
         {
             return new Rectangle(src.X, src.Y, src.Width, src.Height);
+        }
+
+        public static byte[] ToBytes(object obj)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+            bf.Serialize(ms, obj);
+            byte[] bytes = ms.ToArray();
+            return bytes;
+        }
+        public static int[,] FromBytes(byte[] buffer)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream(buffer);
+            int[,] mat = (int[,])bf.Deserialize(ms);
+            return mat;
         }
     }
 }

@@ -1,0 +1,4 @@
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\SystemGameCore\bin\Release\SystemGameCore.dll
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\SystemGameCore\bin\Release\SystemGameCore.pdb
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\SystemGameCore\obj\Release\SystemGameCore.dll
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\SystemGameCore\obj\Release\SystemGameCore.pdb

@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
+
 namespace SystemGameCore
 {
     public class Level
@@ -15,6 +19,8 @@ namespace SystemGameCore
 
         public CollisionMap Collision = new CollisionMap();
         public List<Background> Layers = new List<Background>();
+
+        private Bitmap _allLayers;
 
         public Level()
         {
@@ -45,12 +51,14 @@ namespace SystemGameCore
         public Image GetAllLayers()
         {
             Size s = SizeInPixels;
-            Bitmap img = new Bitmap(s.Width, s.Height);
-            Graphics g = Graphics.FromImage(img);
+            if(_allLayers == null)
+                _allLayers = new Bitmap(s.Width, s.Height);
 
+            Graphics g = Graphics.FromImage(_allLayers);
+            g.Clear(Color.Transparent);
             Layers.ForEach(x => g.DrawImage(x.BitmapImage, new Point()));
 
-            return img;
+            return _allLayers;
         }
 
         public void AddNewLayer()
@@ -87,12 +95,54 @@ namespace SystemGameCore
 
         public void SaveMapAsImage(string filePath)
         {
-            GetAllLayers().Save(filePath + "/" + Name + "_Rendered.png");
+            GetAllLayers().Save(filePath);
         }
 
-        public void Save(string filePath)
+        public void SaveLevel(string fileName)
         {
+            string path = Path.GetDirectoryName(fileName);
+            string basename = Path.GetFileNameWithoutExtension(fileName);
 
+            using (var writer = new System.IO.StreamWriter(fileName))
+            {
+                var serializer = new XmlSerializer(this.GetType());
+                serializer.Serialize(writer, this);
+                writer.Flush();
+            }
+
+            Collision.Save(path + "\\" +basename + "_Coll.bin");
+
+            int i = 0;
+            foreach(Background b in Layers)
+            {
+                b.Save(path + "\\" + basename + "_Layer" + i.ToString() + ".png");
+                i++;
+            }
+        }
+
+        public static Level LoadLevel(string fileName)
+        {
+            string path = Path.GetDirectoryName(fileName);
+            string basename = Path.GetFileNameWithoutExtension(fileName);
+            Level instance = null;
+            using (var stream = System.IO.File.OpenRead(fileName))
+            {
+                var serializer = new XmlSerializer(typeof(Level));
+                instance = serializer.Deserialize(stream) as Level;
+            }
+
+            if (instance != null)
+            {
+                instance.Collision.Load(path + "\\" + basename + "_Coll.bin");
+
+                int i = 0;
+                foreach(Background l in instance.Layers)
+                {
+                    instance.Layers[i].Load(path + "\\" + basename + "_Layer" + i.ToString() + ".png");
+                    i++;
+                }
+            }
+            return instance;
         }
     }
 }

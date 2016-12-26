@@ -4,6 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+
 
 namespace SystemGameCore
 {
@@ -15,7 +20,8 @@ namespace SystemGameCore
 
     public class CollisionMap
     {
-        public CollElem[,] CollMap;
+        [XmlIgnore]
+        public int[,] CollMap;
         public Size GridSize;
         public Size MapSize;
 
@@ -26,7 +32,7 @@ namespace SystemGameCore
 
         public void Resize(Size grid, Size map)
         {
-            CollElem[,] newmap = new CollElem[map.Width, map.Height];
+            int[,] newmap = new int[map.Width, map.Height];
 
             int w = Math.Min(map.Width, MapSize.Width);
             int h = Math.Min(map.Height, MapSize.Height);
@@ -43,6 +49,32 @@ namespace SystemGameCore
             }
             else // create
                 CollMap = newmap;
+        }
+
+        public void Save(string fileName)
+        {
+            File.WriteAllBytes(fileName, ToBytes(CollMap));
+        }
+
+        public void Load(string fileName)
+        {
+            CollMap = FromBytes(File.ReadAllBytes(fileName));
+        }
+
+        public static byte[] ToBytes(object obj)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+            bf.Serialize(ms, obj);
+            byte[] bytes = ms.ToArray();
+            return bytes;
+        }
+        public static int[,] FromBytes(byte[] buffer)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream(buffer);
+            int[,] mat = (int[,])bf.Deserialize(ms);
+            return mat;
         }
     }
 }

@@ -61,6 +61,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnPencil = new System.Windows.Forms.Button();
             this.btnEraser = new System.Windows.Forms.Button();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.levelPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -82,6 +84,7 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.editToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -140,8 +143,9 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -227,6 +231,7 @@
             this.btnSaveImage.Name = "btnSaveImage";
             this.btnSaveImage.Size = new System.Drawing.Size(142, 44);
             this.btnSaveImage.Text = "Export Image";
+            this.btnSaveImage.Click += new System.EventHandler(this.btnSaveImage_Click);
             // 
             // splitContainer1
             // 
@@ -398,6 +403,22 @@
             this.btnEraser.UseVisualStyleBackColor = true;
             this.btnEraser.Click += new System.EventHandler(this.btnEraser_Click);
             // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.levelPropertiesToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // levelPropertiesToolStripMenuItem
+            // 
+            this.levelPropertiesToolStripMenuItem.Enabled = false;
+            this.levelPropertiesToolStripMenuItem.Name = "levelPropertiesToolStripMenuItem";
+            this.levelPropertiesToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
+            this.levelPropertiesToolStripMenuItem.Text = "Level Properties";
+            this.levelPropertiesToolStripMenuItem.Click += new System.EventHandler(this.levelPropertiesToolStripMenuItem_Click);
+            // 
             // frmLevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -466,6 +487,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnEraser;
         private System.Windows.Forms.Button btnPencil;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem levelPropertiesToolStripMenuItem;
     }
 }
 

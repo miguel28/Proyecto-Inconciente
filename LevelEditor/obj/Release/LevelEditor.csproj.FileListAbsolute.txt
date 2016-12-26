@@ -1,0 +1,12 @@
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\LevelEditor\bin\Release\LevelEditor.exe.config
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\LevelEditor\bin\Release\LevelEditor.exe
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\LevelEditor\bin\Release\LevelEditor.pdb
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\LevelEditor\bin\Release\SystemGameCore.dll
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\LevelEditor\bin\Release\SystemGameCore.pdb
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\LevelEditor\obj\Release\LevelEditor.csprojResolveAssemblyReference.cache
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\LevelEditor\obj\Release\LevelEditor.diaLevelProperties.resources
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\LevelEditor\obj\Release\LevelEditor.frmLevelEditor.resources
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\LevelEditor\obj\Release\LevelEditor.Properties.Resources.resources
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\LevelEditor\obj\Release\LevelEditor.csproj.GenerateResource.Cache
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\LevelEditor\obj\Release\LevelEditor.exe
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\LevelEditor\obj\Release\LevelEditor.pdb
