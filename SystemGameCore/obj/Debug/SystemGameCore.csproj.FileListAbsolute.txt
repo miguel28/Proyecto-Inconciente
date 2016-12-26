@@ -1,0 +1,5 @@
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\SystemGameCore\bin\Debug\SystemGameCore.dll
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\SystemGameCore\bin\Debug\SystemGameCore.pdb
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\SystemGameCore\obj\Debug\SystemGameCore.csprojResolveAssemblyReference.cache
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\SystemGameCore\obj\Debug\SystemGameCore.dll
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\SystemGameCore\obj\Debug\SystemGameCore.pdb
