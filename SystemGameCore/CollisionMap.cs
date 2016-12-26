@@ -24,9 +24,25 @@ namespace SystemGameCore
 
         }
 
-        public void ResizeMap()
+        public void Resize(Size grid, Size map)
         {
-            CollMap = new CollElem[MapSize.Width, MapSize.Height];
+            CollElem[,] newmap = new CollElem[map.Width, map.Height];
+
+            int w = Math.Min(map.Width, MapSize.Width);
+            int h = Math.Min(map.Height, MapSize.Height);
+
+            GridSize = grid;
+            MapSize = map;
+
+            if (CollMap != null)
+            {
+                // resize
+                for (int x = 0; x < w; x++)
+                    for ( int y = 0; y< h; y++ )
+                        newmap[x, y] = CollMap[x, y];
+            }
+            else // create
+                CollMap = newmap;
         }
     }
 }

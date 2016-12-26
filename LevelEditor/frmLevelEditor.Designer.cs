@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLevelEditor));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,6 +40,13 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAddTileSets = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.cboxLayers = new System.Windows.Forms.ToolStripComboBox();
+            this.btnAddLayer = new System.Windows.Forms.ToolStripButton();
+            this.btnDeleteLayer = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSaveImage = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.toolNavigator = new System.Windows.Forms.TabControl();
             this.tabTileSet = new System.Windows.Forms.TabPage();
@@ -50,6 +58,9 @@
             this.tabCollisionMap = new System.Windows.Forms.TabPage();
             this.tabEvents = new System.Windows.Forms.TabPage();
             this.picLevelDesign = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnPencil = new System.Windows.Forms.Button();
+            this.btnEraser = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -63,6 +74,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picTileSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSelectedTile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLevelDesign)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -80,6 +92,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newLevelToolStripMenuItem,
             this.openLevelToolStripMenuItem,
             this.saveLevelToolStripMenuItem,
             this.closeLevelToolStripMenuItem,
@@ -89,23 +102,35 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // newLevelToolStripMenuItem
+            // 
+            this.newLevelToolStripMenuItem.Name = "newLevelToolStripMenuItem";
+            this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
+            this.newLevelToolStripMenuItem.Text = "New Level";
+            this.newLevelToolStripMenuItem.Click += new System.EventHandler(this.newLevelToolStripMenuItem_Click);
+            // 
             // openLevelToolStripMenuItem
             // 
             this.openLevelToolStripMenuItem.Name = "openLevelToolStripMenuItem";
             this.openLevelToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.openLevelToolStripMenuItem.Text = "Open Level";
+            this.openLevelToolStripMenuItem.Click += new System.EventHandler(this.openLevelToolStripMenuItem_Click);
             // 
             // saveLevelToolStripMenuItem
             // 
+            this.saveLevelToolStripMenuItem.Enabled = false;
             this.saveLevelToolStripMenuItem.Name = "saveLevelToolStripMenuItem";
             this.saveLevelToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.saveLevelToolStripMenuItem.Text = "Save Level";
+            this.saveLevelToolStripMenuItem.Click += new System.EventHandler(this.saveLevelToolStripMenuItem_Click);
             // 
             // closeLevelToolStripMenuItem
             // 
+            this.closeLevelToolStripMenuItem.Enabled = false;
             this.closeLevelToolStripMenuItem.Name = "closeLevelToolStripMenuItem";
             this.closeLevelToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.closeLevelToolStripMenuItem.Text = "Close Level";
+            this.closeLevelToolStripMenuItem.Click += new System.EventHandler(this.closeLevelToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -126,29 +151,87 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Enabled = false;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnAddTileSets});
+            this.btnAddTileSets,
+            this.toolStripSeparator1,
+            this.toolStripLabel1,
+            this.cboxLayers,
+            this.btnAddLayer,
+            this.btnDeleteLayer,
+            this.toolStripSeparator2,
+            this.btnSaveImage});
             this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1010, 27);
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.toolStrip1.Size = new System.Drawing.Size(1010, 47);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // btnAddTileSets
             // 
-            this.btnAddTileSets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnAddTileSets.Image = ((System.Drawing.Image)(resources.GetObject("btnAddTileSets.Image")));
             this.btnAddTileSets.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddTileSets.Name = "btnAddTileSets";
-            this.btnAddTileSets.Size = new System.Drawing.Size(24, 24);
-            this.btnAddTileSets.Text = "toolStripButton1";
+            this.btnAddTileSets.Size = new System.Drawing.Size(141, 44);
+            this.btnAddTileSets.Text = "Load TileSets";
             this.btnAddTileSets.Click += new System.EventHandler(this.btnAddTileSets_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 47);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(44, 44);
+            this.toolStripLabel1.Text = "Layer";
+            // 
+            // cboxLayers
+            // 
+            this.cboxLayers.Name = "cboxLayers";
+            this.cboxLayers.Size = new System.Drawing.Size(121, 47);
+            this.cboxLayers.SelectedIndexChanged += new System.EventHandler(this.cboxLayers_SelectedIndexChanged);
+            // 
+            // btnAddLayer
+            // 
+            this.btnAddLayer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnAddLayer.Image = ((System.Drawing.Image)(resources.GetObject("btnAddLayer.Image")));
+            this.btnAddLayer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAddLayer.Name = "btnAddLayer";
+            this.btnAddLayer.Size = new System.Drawing.Size(44, 44);
+            this.btnAddLayer.Text = "toolStripButton1";
+            this.btnAddLayer.Click += new System.EventHandler(this.btnAddLayer_Click);
+            // 
+            // btnDeleteLayer
+            // 
+            this.btnDeleteLayer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDeleteLayer.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteLayer.Image")));
+            this.btnDeleteLayer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDeleteLayer.Name = "btnDeleteLayer";
+            this.btnDeleteLayer.Size = new System.Drawing.Size(44, 44);
+            this.btnDeleteLayer.Text = "toolStripButton1";
+            this.btnDeleteLayer.Click += new System.EventHandler(this.btnDeleteLayer_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 47);
+            // 
+            // btnSaveImage
+            // 
+            this.btnSaveImage.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveImage.Image")));
+            this.btnSaveImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSaveImage.Name = "btnSaveImage";
+            this.btnSaveImage.Size = new System.Drawing.Size(142, 44);
+            this.btnSaveImage.Text = "Export Image";
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 55);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 75);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -158,8 +241,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.AutoScroll = true;
+            this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.splitContainer1.Panel2.Controls.Add(this.picLevelDesign);
-            this.splitContainer1.Size = new System.Drawing.Size(1010, 519);
+            this.splitContainer1.Size = new System.Drawing.Size(1010, 499);
             this.splitContainer1.SplitterDistance = 322;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -172,7 +256,7 @@
             this.toolNavigator.Location = new System.Drawing.Point(0, 0);
             this.toolNavigator.Name = "toolNavigator";
             this.toolNavigator.SelectedIndex = 0;
-            this.toolNavigator.Size = new System.Drawing.Size(322, 519);
+            this.toolNavigator.Size = new System.Drawing.Size(322, 499);
             this.toolNavigator.TabIndex = 0;
             // 
             // tabTileSet
@@ -181,7 +265,7 @@
             this.tabTileSet.Location = new System.Drawing.Point(4, 25);
             this.tabTileSet.Name = "tabTileSet";
             this.tabTileSet.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTileSet.Size = new System.Drawing.Size(314, 490);
+            this.tabTileSet.Size = new System.Drawing.Size(314, 470);
             this.tabTileSet.TabIndex = 0;
             this.tabTileSet.Text = "Tile Set";
             this.tabTileSet.UseVisualStyleBackColor = true;
@@ -192,7 +276,7 @@
             this.tlpTileset.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpTileset.Controls.Add(this.cboxTileSetSelect, 0, 0);
             this.tlpTileset.Controls.Add(this.pnlTileSetScrollContainer, 0, 1);
-            this.tlpTileset.Controls.Add(this.picSelectedTile, 0, 2);
+            this.tlpTileset.Controls.Add(this.panel1, 0, 2);
             this.tlpTileset.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpTileset.Location = new System.Drawing.Point(3, 3);
             this.tlpTileset.Name = "tlpTileset";
@@ -200,7 +284,7 @@
             this.tlpTileset.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpTileset.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpTileset.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tlpTileset.Size = new System.Drawing.Size(308, 484);
+            this.tlpTileset.Size = new System.Drawing.Size(308, 464);
             this.tlpTileset.TabIndex = 0;
             // 
             // cboxTileSetSelect
@@ -216,11 +300,12 @@
             // pnlTileSetScrollContainer
             // 
             this.pnlTileSetScrollContainer.AutoScroll = true;
+            this.pnlTileSetScrollContainer.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.pnlTileSetScrollContainer.Controls.Add(this.picTileSet);
             this.pnlTileSetScrollContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTileSetScrollContainer.Location = new System.Drawing.Point(3, 33);
             this.pnlTileSetScrollContainer.Name = "pnlTileSetScrollContainer";
-            this.pnlTileSetScrollContainer.Size = new System.Drawing.Size(302, 348);
+            this.pnlTileSetScrollContainer.Size = new System.Drawing.Size(302, 328);
             this.pnlTileSetScrollContainer.TabIndex = 1;
             // 
             // picTileSet
@@ -239,9 +324,10 @@
             // 
             // picSelectedTile
             // 
-            this.picSelectedTile.Location = new System.Drawing.Point(3, 387);
+            this.picSelectedTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picSelectedTile.Location = new System.Drawing.Point(3, 5);
             this.picSelectedTile.Name = "picSelectedTile";
-            this.picSelectedTile.Size = new System.Drawing.Size(142, 92);
+            this.picSelectedTile.Size = new System.Drawing.Size(142, 86);
             this.picSelectedTile.TabIndex = 2;
             this.picSelectedTile.TabStop = false;
             // 
@@ -250,7 +336,7 @@
             this.tabCollisionMap.Location = new System.Drawing.Point(4, 25);
             this.tabCollisionMap.Name = "tabCollisionMap";
             this.tabCollisionMap.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCollisionMap.Size = new System.Drawing.Size(314, 490);
+            this.tabCollisionMap.Size = new System.Drawing.Size(314, 470);
             this.tabCollisionMap.TabIndex = 1;
             this.tabCollisionMap.Text = "Collision Map";
             this.tabCollisionMap.UseVisualStyleBackColor = true;
@@ -259,7 +345,7 @@
             // 
             this.tabEvents.Location = new System.Drawing.Point(4, 25);
             this.tabEvents.Name = "tabEvents";
-            this.tabEvents.Size = new System.Drawing.Size(314, 490);
+            this.tabEvents.Size = new System.Drawing.Size(314, 470);
             this.tabEvents.TabIndex = 2;
             this.tabEvents.Text = "Events";
             this.tabEvents.UseVisualStyleBackColor = true;
@@ -275,6 +361,42 @@
             this.picLevelDesign.Paint += new System.Windows.Forms.PaintEventHandler(this.picLevelDesign_Paint);
             this.picLevelDesign.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picLevelDesign_MouseClick);
             this.picLevelDesign.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picLevelDesign_MouseMove);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnEraser);
+            this.panel1.Controls.Add(this.btnPencil);
+            this.panel1.Controls.Add(this.picSelectedTile);
+            this.panel1.Location = new System.Drawing.Point(3, 367);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(302, 94);
+            this.panel1.TabIndex = 2;
+            // 
+            // btnPencil
+            // 
+            this.btnPencil.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.btnPencil.Image = ((System.Drawing.Image)(resources.GetObject("btnPencil.Image")));
+            this.btnPencil.Location = new System.Drawing.Point(151, 5);
+            this.btnPencil.Name = "btnPencil";
+            this.btnPencil.Size = new System.Drawing.Size(74, 86);
+            this.btnPencil.TabIndex = 3;
+            this.btnPencil.Text = "Pencil";
+            this.btnPencil.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPencil.UseVisualStyleBackColor = false;
+            this.btnPencil.Click += new System.EventHandler(this.btnPencil_Click);
+            // 
+            // btnEraser
+            // 
+            this.btnEraser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEraser.Image = ((System.Drawing.Image)(resources.GetObject("btnEraser.Image")));
+            this.btnEraser.Location = new System.Drawing.Point(231, 5);
+            this.btnEraser.Name = "btnEraser";
+            this.btnEraser.Size = new System.Drawing.Size(68, 86);
+            this.btnEraser.TabIndex = 4;
+            this.btnEraser.Text = "Eraser";
+            this.btnEraser.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnEraser.UseVisualStyleBackColor = true;
+            this.btnEraser.Click += new System.EventHandler(this.btnEraser_Click);
             // 
             // frmLevelEditor
             // 
@@ -304,6 +426,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picTileSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSelectedTile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLevelDesign)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -332,6 +455,17 @@
         private System.Windows.Forms.PictureBox picTileSet;
         private System.Windows.Forms.PictureBox picLevelDesign;
         private System.Windows.Forms.PictureBox picSelectedTile;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripComboBox cboxLayers;
+        private System.Windows.Forms.ToolStripButton btnAddLayer;
+        private System.Windows.Forms.ToolStripButton btnDeleteLayer;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem newLevelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton btnSaveImage;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnEraser;
+        private System.Windows.Forms.Button btnPencil;
     }
 }
 

@@ -18,8 +18,8 @@ namespace LevelEditor
         {
             InitializeComponent();
 
-            Graphics g = Graphics.FromImage(tempImage);
-            g.Clear(Color.White);
+            //Graphics g = Graphics.FromImage(tempImage);
+            //g.Clear(Color.White);
             picLevelDesign.Image = tempImage;
         }
 
@@ -51,7 +51,8 @@ namespace LevelEditor
         private List<string> TileSetsPaths = new List<string>();
         private Image TileSet;
         private Image DashedTileSet;
-
+        private Color TileTransparentColor;
+        
         private void UpdateTileSetsCombo()
         {
             cboxTileSetSelect.Items.Clear();
@@ -63,7 +64,7 @@ namespace LevelEditor
 
         private void OpenTileSet(string path)
         {
-            Image tilesetimage = Image.FromFile(path);
+            Image tilesetimage = new Bitmap(path);
             TileSet = tilesetimage;
             DashedTileSet = (Image)tilesetimage.Clone();
 
@@ -71,6 +72,8 @@ namespace LevelEditor
 
             Draw.DrawGrid(ref DashedTileSet, editingLevel.GridSize);
             picTileSet.Image = DashedTileSet;
+
+            TileTransparentColor = ((Bitmap)TileSet).GetPixel(0, TileSet.Height-1);
         }
 
         private void cboxTileSetSelect_SelectedIndexChanged(object sender, EventArgs e)
@@ -140,24 +143,49 @@ namespace LevelEditor
         #endregion
 
         #region LevelEditor
-        private Level editingLevel = new Level();
+        private Level editingLevel;
         private Image tempImage = new Bitmap(3200, 3200 / 2);
 
         private Point TileCursor;
 
         private void picLevelDesign_MouseClick(object sender, MouseEventArgs e)
         {
+            if (editingLevel == null)
+                return;
+
             if (!Helpers.IsRectangleNull(UnitRectangle) && TileSelection != null)
             {
                 Point p = Helpers.GetExpandablePoint(TileCursor, editingLevel.GridSize);
-                Graphics g = Graphics.FromImage(tempImage);
-                g.DrawImage(TileSelection, p);
-                picLevelDesign.Invalidate();
+                Background layer = editingLevel.Layers[cboxLayers.SelectedIndex];
+
+                if (SelectedEraser)
+                {
+                    Rectangle r = Helpers.CloneRectangle(UnitRectangle);
+                    r.X = TileCursor.X;
+                    r.Y = TileCursor.Y;
+                    Rectangle r1 = Helpers.GetExpandedRectangle(r, editingLevel.GridSize);
+
+                    layer.BitmapImage = Draw.DrawEmptyRectangle(layer.BitmapImage, r1);
+                    editingLevel.Layers[cboxLayers.SelectedIndex] = layer;
+                }
+                else
+                {
+                    Graphics g = Graphics.FromImage(layer.BitmapImage);
+
+                    Image toPaint = Draw.SetTransparecy(TileSelection, TileTransparentColor);
+
+                    g.DrawImage(toPaint, p);
+                }
+
+                RedrawAllMap();
             }
         }
 
         private void picLevelDesign_MouseMove(object sender, MouseEventArgs e)
         {
+            if (editingLevel == null)
+                return;
+
             if (!Helpers.IsRectangleNull(UnitRectangle) && TileSelection != null)
             {
                 Point p = Helpers.CalcUnitPoint(e.Location, editingLevel.GridSize);
@@ -166,11 +194,14 @@ namespace LevelEditor
                     TileCursor = p;
                     picLevelDesign.Invalidate();
                 }
-            }
+            } 
         }
 
         private void picLevelDesign_Paint(object sender, PaintEventArgs e)
         {
+            if (editingLevel == null)
+                return;
+
             if (!Helpers.IsRectangleNull(UnitRectangle) && TileSelection != null)
             {
                 Graphics g = e.Graphics;
@@ -178,10 +209,100 @@ namespace LevelEditor
                 r.X = TileCursor.X;
                 r.Y = TileCursor.Y;
 
-                Pen p = new Pen(Color.Red, 3);
+                Color c = SelectedEraser ? Color.Red : Color.Green;
+                Pen p = new Pen(c, 3);
                 Rectangle r1 = Helpers.GetExpandedRectangle(r, editingLevel.GridSize);
                 g.DrawRectangle(p, r1);
             }
+        }
+
+        private bool SelectedEraser = false;
+
+        private void btnPencil_Click(object sender, EventArgs e)
+        {
+            SelectedEraser = false;
+            btnPencil.BackColor = SystemColors.ControlDark;
+            btnEraser.BackColor = SystemColors.Control;
+        }
+
+        private void btnEraser_Click(object sender, EventArgs e)
+        {
+            SelectedEraser = true;
+            btnPencil.BackColor = SystemColors.Control;
+            btnEraser.BackColor = SystemColors.ControlDark;
+        }
+
+        private void cboxLayers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RedrawAllMap()
+        {
+            Image img = editingLevel.GetAllLayers();
+            picLevelDesign.Image = img;
+        }
+
+        private void btnAddLayer_Click(object sender, EventArgs e)
+        {
+            editingLevel.AddNewLayer();
+            UpdateLayersList();
+
+        }
+
+        private void btnDeleteLayer_Click(object sender, EventArgs e)
+        {
+            editingLevel.RemoveLayer(cboxLayers.SelectedIndex);
+            UpdateLayersList();
+        }
+
+        private void UpdateLayersList()
+        {
+            cboxLayers.Items.Clear();
+            cboxLayers.Items.AddRange(editingLevel.GetLayersLabels());
+            cboxLayers.SelectedIndex = 0;
+        }
+        #endregion
+
+
+        #region Menu Methods
+        private void newLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            diaLevelProperties dialog = new diaLevelProperties(null);
+            dialog.ShowDialog();
+            Level le = dialog.edLevel;
+            if (le != null)
+            {
+                editingLevel = le;
+                UpdateLayersList();
+
+                EnableEditing(true);
+            }
+        }
+        
+        private void openLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void closeLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EnableEditing(bool en)
+        {
+            toolStrip1.Enabled = en;
+            //toolNavigator.Enabled = en;
+            newLevelToolStripMenuItem.Enabled = !en;
+            openLevelToolStripMenuItem.Enabled = !en;
+            closeLevelToolStripMenuItem.Enabled = en;
+            saveLevelToolStripMenuItem.Enabled = en;
         }
         #endregion
     }

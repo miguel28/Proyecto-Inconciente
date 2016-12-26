@@ -22,9 +22,18 @@ namespace LevelEditor
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            edLevel.MapSize = new Size((int)numMapWidth.Value, (int)numMapHeight.Value);
-            edLevel.GridSize = new Size((int)numGridWidth.Value, (int)numGridHeight.Value);
-            edLevel.ResizeMap();
+            Size MapSize = new Size((int)numMapWidth.Value, (int)numMapHeight.Value);
+            Size GridSize = new Size((int)numGridWidth.Value, (int)numGridHeight.Value);
+
+            if (edLevel == null)
+            {
+                edLevel = new Level();
+                edLevel.Create();
+            }
+  
+            edLevel.Resize(GridSize, MapSize);
+
+            Close();
         }
 
     }

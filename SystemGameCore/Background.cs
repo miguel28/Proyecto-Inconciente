@@ -10,13 +10,34 @@ namespace SystemGameCore
     public class Background
     {
         public Image BitmapImage;
-        public string Name = "";
         public bool Visible = true;
 
-        public void Create(Level l)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s">Expanded Size</param>
+        public void Resize(Size s)
         {
-            Size s = l.SizeInPixels;
-            BitmapImage = new Bitmap(s.Width, s.Height);
+            Bitmap newimage = new Bitmap(s.Width, s.Height);
+
+            if (BitmapImage != null)
+            {
+                Graphics g = Graphics.FromImage(newimage);
+                g.DrawImage(BitmapImage, new Point());
+            }
+            else
+                BitmapImage = newimage;
+            
         } 
+
+        public void Load(string path)
+        {
+            BitmapImage = new Bitmap(path);
+        }
+
+        public void Save(string path)
+        {
+            BitmapImage.Save(path);
+        }
     }
 }

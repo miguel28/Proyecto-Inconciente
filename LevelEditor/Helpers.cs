@@ -38,6 +38,10 @@ namespace LevelEditor
             r.Width++;
             r.Height++;
 
+            while (r.Width <= 0)
+                r.Width++;
+            while (r.Height <= 0)
+                r.Height++;
             return r;
         }
 

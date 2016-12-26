@@ -39,5 +39,45 @@ namespace LevelEditor
                 g.DrawLine(blackPen, new Point(i, 0), new Point(i, img.Width));
             }
         }
+
+        public static Image ReplaceColor(Image img, Color find, Color replace)
+        {
+            Bitmap bmp = (Bitmap)img;
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                for (int y = 0; y < bmp.Height; y++)
+                {
+                    Color gotColor = bmp.GetPixel(x, y);
+                    if (IsEqual(gotColor, find))
+                    {
+                        bmp.SetPixel(x, y, replace);
+                    }                    
+                }
+            }
+            return bmp;
+        }
+
+        public static bool IsEqual(Color c1, Color c2)
+        {
+            return (c1.A == c2.A && c1.R == c2.R && c1.G == c2.G && c1.B == c2.B);
+        }
+
+        public static Image SetTransparecy(Image img, Color find)
+        {
+            return ReplaceColor(img, find, Color.FromArgb(0, 0, 0, 0));
+        }
+
+        public static Image DrawEmptyRectangle(Image img, Rectangle r)
+        {
+            Bitmap bmp = (Bitmap)img;
+            for (int x = r.X; x < (r.Right); x++)
+            {
+                for (int y = r.Y; y < (r.Bottom); y++)
+                {
+                    bmp.SetPixel(x, y, Color.FromArgb(0,0,0,0));
+                }
+            }
+            return bmp;
+        }
     }
 }
