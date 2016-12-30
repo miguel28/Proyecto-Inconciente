@@ -7,3 +7,6 @@ C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyect
 C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\obj\x86\Release\Proyecto Inconsiente.csprojResolveAssemblyReference.cache
 C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\obj\x86\Release\Proyecto Inconsiente.exe
 C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\obj\x86\Release\Proyecto Inconsiente.pdb
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\bin\DesktopGL\x86\Release\Content\Backgrounds\background1.xnb
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\bin\DesktopGL\x86\Release\Content\Characters\maidchar01.xnb
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\bin\DesktopGL\x86\Release\Content\Fonts\Arial.xnb

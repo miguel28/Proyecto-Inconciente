@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Miguel/Desktop/Projectos Personales/Random/Proyecto-Inconciente/Proyecto Inconsiente/Content/Backgrounds/background1.jpg</File>
+    <File>C:/Users/Miguel/Desktop/Projectos Personales/Random/Proyecto-Inconciente/Proyecto Inconsiente/Content/Characters/maidchar01.png</File>
+    <File>C:/Users/Miguel/Desktop/Projectos Personales/Random/Proyecto-Inconciente/Proyecto Inconsiente/Content/Fonts/Arial.spritefont</File>
+  </SourceFiles>
+</SourceFileCollection>

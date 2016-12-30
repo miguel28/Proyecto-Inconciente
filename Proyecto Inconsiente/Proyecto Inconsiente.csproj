@@ -38,7 +38,12 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Game1.cs" />
+    <Compile Include="Logic\Background.cs" />
+    <Compile Include="Logic\Globals.cs" />
+    <Compile Include="Logic\Graphic.cs" />
+    <Compile Include="Logic\Player.cs" />
+    <Compile Include="Logic\Sprite.cs" />
+    <Compile Include="MainGameLogic.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

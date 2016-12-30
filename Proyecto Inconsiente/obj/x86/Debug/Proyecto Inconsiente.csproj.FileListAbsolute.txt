@@ -16,3 +16,6 @@ C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyect
 C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\NVorbis.dll
 C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\OpenTK.dll
 C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\obj\x86\Debug\Proyecto Inconsiente.csprojResolveAssemblyReference.cache
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\Content\Backgrounds\background1.xnb
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\Content\Characters\maidchar01.xnb
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\Content\Fonts\Arial.xnb
