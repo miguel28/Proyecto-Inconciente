@@ -12,9 +12,12 @@ namespace Proyecto_Inconsiente
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteBatch world;
         Background back1;
-        Sprite sprite1;
+        Player sprite1;
         SpriteFont font;
+        GameLevel level2;
+        Camera2D camera;
 
         public MainGameLogic()
         {
@@ -36,6 +39,7 @@ namespace Proyecto_Inconsiente
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            camera = new Camera2D(GraphicsDevice.Viewport);
 
             base.Initialize();
         }
@@ -48,15 +52,20 @@ namespace Proyecto_Inconsiente
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            world = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            back1 = new Background("Backgrounds\\background1", spriteBatch);
-            back1.UseLimits = true;
+            back1 = new Background("Backgrounds\\background1", world);
 
-            sprite1 = new Player(spriteBatch);
+            sprite1 = new Player(world);
             sprite1.SetAnim(new int[] { 0, 1, 2, 3, 2, 1 }, 0.25f);
 
             font = Content.Load<SpriteFont>("Fonts\\Arial");
+
+            level2 = GameLevel.LoadGameLevel("Levels\\Level2.xml", world);
+            sprite1.Level = level2;
+            camera.Width = level2.Collision.Texture.Width;
+            camera.Height = level2.Collision.Texture.Height;
         }
 
         /// <summary>
@@ -79,18 +88,22 @@ namespace Proyecto_Inconsiente
                 Exit();
 
             // TODO: Add your update logic here
-            /*if (Keyboard.GetState().IsKeyDown(Keys.Up))
-                back1.Position += new Vector2(0,-10);
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-                back1.Position += new Vector2(0, 10);*/
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
-                back1.Position += new Vector2(2, 0);
+            {
+                //camera.Position += new Vector2(-1, 0);
+            }
+                
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                back1.Position += new Vector2(-2, 0);
+            {
+                //camera.Position += new Vector2(1, 0);
+            }
 
+            camera.Follow(sprite1, .3f);
+               
             back1.Update(gameTime);
-
+            level2.Update(gameTime);
             sprite1.Update(gameTime);
+            
 
             base.Update(gameTime);
         }
@@ -104,17 +117,19 @@ namespace Proyecto_Inconsiente
             GraphicsDevice.Clear(Color.DarkGray);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
+            Matrix tranform = camera.GetViewMatrix();
 
+            world.Begin(transformMatrix: tranform);
             back1.Draw(gameTime);
+            level2.Draw(gameTime);
             sprite1.Draw(gameTime);
+            world.End();
 
+            spriteBatch.Begin();
             spriteBatch.DrawString(font, "Pos:" + sprite1.Position.ToString() , new Vector2(10, 10), Color.White);
             spriteBatch.DrawString(font, "Spd:" + sprite1.Speed.ToString(), new Vector2(10, 30), Color.White);
-
-
-
             spriteBatch.End();
+
             base.Draw(gameTime);
         }
     }

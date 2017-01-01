@@ -49,6 +49,8 @@ namespace Proyecto_Inconsiente.Logic
             base.Draw(gameTime);
         }
 
+        public GameLevel Level;
+
         public bool TouchingGround;
         public bool Moving
         {
@@ -93,10 +95,20 @@ namespace Proyecto_Inconsiente.Logic
             else
                 CurrentMove = PlayerMoves.Nothing;
 
-            if (MovingLeft)
+            if (MovingLeft && !Level.IsColliding(this.Position + new Vector2(-1f, 24)) )
                 base.Position += new Vector2(-1f, 0);
-            else if (MovingRight)
+            else if (MovingRight && !Level.IsColliding(this.Position + new Vector2(1f + 32f, 24)) )
                 base.Position += new Vector2(1f, 0);
+
+            if (Keyboard.GetState().IsKeyUp(Keys.Up))
+                while ( (Level.IsColliding(this.Position + new Vector2(-1f, 47)) && !Level.IsColliding(this.Position + new Vector2(-1f, 24)))
+                ||  (Level.IsColliding(this.Position + new Vector2(1f + 32f, 47)) && !Level.IsColliding(this.Position + new Vector2(1f + 32f, 24)))) 
+                {
+                    //if (!TouchingGround)
+                    //    break;
+                    this.Position.Y--;
+                
+                }
 
             if (LastMove == PlayerMoves.Nothing && Moving)
             {
@@ -131,6 +143,12 @@ namespace Proyecto_Inconsiente.Logic
                 
                 base.Position.Y = 400 - destinationRectangle.Height;
                 
+            }
+            else if(Level.IsColliding(this.Position + new Vector2(16,48)) && !TouchingGround)
+            {
+                TouchingGround = true;
+                base.Acceleration.Y = 0;
+                base.Speed.Y = 0;
             }
             else
             {

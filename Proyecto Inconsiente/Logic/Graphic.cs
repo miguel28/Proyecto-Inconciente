@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 
 namespace Proyecto_Inconsiente.Logic
 {
-    public class Graphic
+    public class Graphic : GameObject
     {
         private Texture2D gfx;
         
@@ -28,37 +28,15 @@ namespace Proyecto_Inconsiente.Logic
             }
         }
 
-        public Vector2 Position;
-        public Vector2 Speed;
-        public Vector2 Acceleration;
         public SpriteBatch Batch;
+        public Color Colorize;
 
-        public bool UseDynamics
+        public override void Update(GameTime gameTime)
         {
-            get;
-            set;
+            base.Update(gameTime);
         }
 
-        public Color Colorize
-        {
-            get;
-            set;
-        }
-
-        public virtual void Update(GameTime gameTime)
-        {
-            if (UseDynamics)
-            {
-                float sec = (float)gameTime.ElapsedGameTime.TotalSeconds;
-                Vector2 deltaspeed = Vector2.Transform(Acceleration, Matrix.CreateScale(sec));
-                Speed += deltaspeed;
-
-                Vector2 deltapos = Vector2.Transform(Speed, Matrix.CreateScale(sec));
-                Position += deltapos;
-            }
-        }
-
-        public virtual void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
             if (gfx != null)
                 Batch.Draw(gfx, Position, Colorize);

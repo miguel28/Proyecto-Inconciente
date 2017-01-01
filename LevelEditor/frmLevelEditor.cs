@@ -17,14 +17,9 @@ namespace LevelEditor
         public frmLevelEditor()
         {
             InitializeComponent();
-
-            //Graphics g = Graphics.FromImage(tempImage);
-            //g.Clear(Color.White);
-            picLevelDesign.Image = tempImage;
         }
 
         #region ToolStrip Events
-
         private void btnAddTileSets_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -144,8 +139,6 @@ namespace LevelEditor
 
         #region LevelEditor
         private Level editingLevel;
-        private Image tempImage = new Bitmap(3200, 3200 / 2);
-
         private Point TileCursor;
 
         private void picLevelDesign_MouseClick(object sender, MouseEventArgs e)
@@ -153,6 +146,14 @@ namespace LevelEditor
             if (editingLevel == null)
                 return;
 
+            if (WorkingTab == SelectedTab.Tileset)
+                DrawNewTileSetOnLevel();
+            if (WorkingTab == SelectedTab.Collisions)
+                DrawCollisionsOnMap();
+        }
+
+        private void DrawNewTileSetOnLevel()
+        {
             if (!Helpers.IsRectangleNull(UnitRectangle) && TileSelection != null)
             {
                 Point p = Helpers.GetExpandablePoint(TileCursor, editingLevel.GridSize);
@@ -181,20 +182,38 @@ namespace LevelEditor
             }
         }
 
+        private void DrawCollisionsOnMap()
+        {
+            if (!Helpers.IsRectangleNull(colUnitRect) && selectedCol != null)
+            {
+                Point p = Helpers.GetExpandablePoint(TileCursor, editingLevel.GridSize);
+                Background layer = editingLevel.Collision;
+
+                Rectangle r = Helpers.CloneRectangle(colUnitRect);
+                r.X = TileCursor.X;
+                r.Y = TileCursor.Y;
+                Rectangle r1 = Helpers.GetExpandedRectangle(r, editingLevel.GridSize);
+
+                layer.BitmapImage = Draw.DrawSameColorRectangle(layer.BitmapImage, (Bitmap)selectedCol, r1);
+                editingLevel.Collision = layer;
+
+                RedrawAllMap();
+            }
+        }
+
         private void picLevelDesign_MouseMove(object sender, MouseEventArgs e)
         {
             if (editingLevel == null)
                 return;
 
-            if (!Helpers.IsRectangleNull(UnitRectangle) && TileSelection != null)
+
+            Point p = Helpers.CalcUnitPoint(e.Location, editingLevel.GridSize);
+            if (!Helpers.IsEqual(p, TileCursor))
             {
-                Point p = Helpers.CalcUnitPoint(e.Location, editingLevel.GridSize);
-                if (!Helpers.IsEqual(p, TileCursor))
-                {
-                    TileCursor = p;
-                    picLevelDesign.Invalidate();
-                }
-            } 
+                TileCursor = p;
+                picLevelDesign.Invalidate();
+            }
+
         }
 
         private void picLevelDesign_Paint(object sender, PaintEventArgs e)
@@ -241,7 +260,10 @@ namespace LevelEditor
 
         private void RedrawAllMap()
         {
-            Image img = editingLevel.GetAllLayers();
+            if (editingLevel == null)
+                return;
+
+            Image img = editingLevel.GetAllLayers(WorkingTab == SelectedTab.Collisions);
             picLevelDesign.Image = img;
         }
 
@@ -265,7 +287,6 @@ namespace LevelEditor
             cboxLayers.SelectedIndex = 0;
         }
         #endregion
-
 
         #region Menu Methods
         private void newLevelToolStripMenuItem_Click(object sender, EventArgs e)
@@ -353,6 +374,46 @@ namespace LevelEditor
             closeLevelToolStripMenuItem.Enabled = en;
             saveLevelToolStripMenuItem.Enabled = en;
             levelPropertiesToolStripMenuItem.Enabled = en;
+        }
+
+        private SelectedTab WorkingTab;
+        private enum SelectedTab : int
+        {
+            Tileset,
+            Collisions,
+            Events
+        }
+
+        private void toolNavigator_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            WorkingTab = (SelectedTab)toolNavigator.SelectedIndex;
+            RedrawAllMap();
+        }
+        #endregion
+
+        #region Collision Map
+        private Image selectedCol;
+        private Rectangle colUnitRect;
+        private void picCollisionMap_MouseClick(object sender, MouseEventArgs e)
+        {
+            colUnitRect = Helpers.CalcUnitRectangle(e.Location, e.Location, editingLevel.GridSize);
+            picCollisionMap.Invalidate();
+
+            Rectangle r = Helpers.GetExpandedRectangle(colUnitRect, editingLevel.GridSize);
+            selectedCol = Draw.ChopImage(picCollisionMap.Image, r);
+        }
+
+        
+
+        private void picCollisionMap_Paint(object sender, PaintEventArgs e)
+        {
+            if (!Helpers.IsRectangleNull(colUnitRect))
+            {
+                Graphics g = e.Graphics;
+                Pen p = new Pen(Color.Yellow, 5);
+                Rectangle r = Helpers.GetExpandedRectangle(colUnitRect, editingLevel.GridSize);
+                g.DrawRectangle(p, r);
+            }
         }
         #endregion
     }

@@ -96,5 +96,18 @@ namespace LevelEditor
             }
             return bmp;
         }
+
+        public static Image DrawSameColorRectangle(Image img, Bitmap tile, Rectangle r)
+        {
+            Bitmap bmp = (Bitmap)img;
+            for (int x = r.X; x < (r.Right); x++)
+            {
+                for (int y = r.Y; y < (r.Bottom); y++)
+                {
+                    bmp.SetPixel(x, y, tile.GetPixel(x - r.X, y-r.Y));
+                }
+            }
+            return bmp;
+        }
     }
 }

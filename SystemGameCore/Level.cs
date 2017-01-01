@@ -17,7 +17,7 @@ namespace SystemGameCore
 
         public string Name = "";
 
-        public CollisionMap Collision = new CollisionMap();
+        public Background Collision = new Background();
         public List<Background> Layers = new List<Background>();
 
         private Bitmap _allLayers;
@@ -35,20 +35,15 @@ namespace SystemGameCore
             }
         }
 
-        public void Load(string path)
-        {
-            
-        }
-
         public void Resize(Size grid, Size map)
         {
             GridSize = grid;
             MapSize = map;
 
-            Collision.Resize(GridSize, MapSize);
+            Collision.Resize(SizeInPixels);
         }
 
-        public Image GetAllLayers()
+        public Image GetAllLayers(bool includecol = false)
         {
             Size s = SizeInPixels;
             if(_allLayers == null)
@@ -57,6 +52,9 @@ namespace SystemGameCore
             Graphics g = Graphics.FromImage(_allLayers);
             g.Clear(Color.Transparent);
             Layers.ForEach(x => g.DrawImage(x.BitmapImage, new Point()));
+
+            if (includecol)
+                g.DrawImage(Collision.BitmapImage, new Point());
 
             return _allLayers;
         }
@@ -110,7 +108,7 @@ namespace SystemGameCore
                 writer.Flush();
             }
 
-            Collision.Save(path + "\\" +basename + "_Coll.bin");
+            Collision.Save(path + "\\" +basename + "_Coll.png");
 
             int i = 0;
             foreach(Background b in Layers)
@@ -120,7 +118,7 @@ namespace SystemGameCore
             }
         }
 
-        public static Level LoadLevel(string fileName)
+        public static Level LoadLevel(string fileName, bool LoadContents = true)
         {
             string path = Path.GetDirectoryName(fileName);
             string basename = Path.GetFileNameWithoutExtension(fileName);
@@ -131,14 +129,14 @@ namespace SystemGameCore
                 instance = serializer.Deserialize(stream) as Level;
             }
 
-            if (instance != null)
+            if (instance != null && LoadContents)
             {
-                instance.Collision.Load(path + "\\" + basename + "_Coll.bin");
+                instance.Collision.Load(path + "\\" + basename + "_Coll.png", instance.SizeInPixels);
 
                 int i = 0;
                 foreach(Background l in instance.Layers)
                 {
-                    instance.Layers[i].Load(path + "\\" + basename + "_Layer" + i.ToString() + ".png");
+                    instance.Layers[i].Load(path + "\\" + basename + "_Layer" + i.ToString() + ".png", instance.SizeInPixels);
                     i++;
                 }
             }

@@ -41,9 +41,12 @@ namespace SystemGameCore
             
         } 
 
-        public void Load(string path)
+        public void Load(string path, Size s)
         {
-            BitmapImage = new Bitmap(path);
+            if (File.Exists(path))
+                BitmapImage = new Bitmap(path);
+            else
+                Resize(s); // creates
         }
 
         public void Save(string path)

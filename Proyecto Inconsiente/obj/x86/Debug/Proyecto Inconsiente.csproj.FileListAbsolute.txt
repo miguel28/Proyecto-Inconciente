@@ -19,3 +19,8 @@ C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyect
 C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\Content\Backgrounds\background1.xnb
 C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\Content\Characters\maidchar01.xnb
 C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\Content\Fonts\Arial.xnb
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\Levels\Level2.xml
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\SystemGameCore.dll
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\SystemGameCore.pdb
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\Content\Levels\Level2_Coll.xnb
+C:\Users\Miguel\Desktop\Projectos Personales\Random\Proyecto-Inconciente\Proyecto Inconsiente\bin\DesktopGL\x86\Debug\Content\Levels\Level2_Layer0.xnb

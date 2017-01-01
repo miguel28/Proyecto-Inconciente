@@ -37,6 +37,8 @@
             this.closeLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.levelPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAddTileSets = new System.Windows.Forms.ToolStripButton();
@@ -54,15 +56,14 @@
             this.cboxTileSetSelect = new System.Windows.Forms.ComboBox();
             this.pnlTileSetScrollContainer = new System.Windows.Forms.Panel();
             this.picTileSet = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnEraser = new System.Windows.Forms.Button();
+            this.btnPencil = new System.Windows.Forms.Button();
             this.picSelectedTile = new System.Windows.Forms.PictureBox();
             this.tabCollisionMap = new System.Windows.Forms.TabPage();
             this.tabEvents = new System.Windows.Forms.TabPage();
             this.picLevelDesign = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnPencil = new System.Windows.Forms.Button();
-            this.btnEraser = new System.Windows.Forms.Button();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.levelPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.picCollisionMap = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -74,9 +75,11 @@
             this.tlpTileset.SuspendLayout();
             this.pnlTileSetScrollContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTileSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picSelectedTile)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picLevelDesign)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectedTile)).BeginInit();
+            this.tabCollisionMap.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLevelDesign)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCollisionMap)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -143,9 +146,25 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.levelPropertiesToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // levelPropertiesToolStripMenuItem
+            // 
+            this.levelPropertiesToolStripMenuItem.Enabled = false;
+            this.levelPropertiesToolStripMenuItem.Name = "levelPropertiesToolStripMenuItem";
+            this.levelPropertiesToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
+            this.levelPropertiesToolStripMenuItem.Text = "Level Properties";
+            this.levelPropertiesToolStripMenuItem.Click += new System.EventHandler(this.levelPropertiesToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -169,7 +188,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(1010, 47);
+            this.toolStrip1.Size = new System.Drawing.Size(1010, 28);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -178,25 +197,25 @@
             this.btnAddTileSets.Image = ((System.Drawing.Image)(resources.GetObject("btnAddTileSets.Image")));
             this.btnAddTileSets.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddTileSets.Name = "btnAddTileSets";
-            this.btnAddTileSets.Size = new System.Drawing.Size(141, 44);
+            this.btnAddTileSets.Size = new System.Drawing.Size(121, 25);
             this.btnAddTileSets.Text = "Load TileSets";
             this.btnAddTileSets.Click += new System.EventHandler(this.btnAddTileSets_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 47);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 28);
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(44, 44);
+            this.toolStripLabel1.Size = new System.Drawing.Size(44, 25);
             this.toolStripLabel1.Text = "Layer";
             // 
             // cboxLayers
             // 
             this.cboxLayers.Name = "cboxLayers";
-            this.cboxLayers.Size = new System.Drawing.Size(121, 47);
+            this.cboxLayers.Size = new System.Drawing.Size(121, 28);
             this.cboxLayers.SelectedIndexChanged += new System.EventHandler(this.cboxLayers_SelectedIndexChanged);
             // 
             // btnAddLayer
@@ -205,7 +224,7 @@
             this.btnAddLayer.Image = ((System.Drawing.Image)(resources.GetObject("btnAddLayer.Image")));
             this.btnAddLayer.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddLayer.Name = "btnAddLayer";
-            this.btnAddLayer.Size = new System.Drawing.Size(44, 44);
+            this.btnAddLayer.Size = new System.Drawing.Size(24, 25);
             this.btnAddLayer.Text = "toolStripButton1";
             this.btnAddLayer.Click += new System.EventHandler(this.btnAddLayer_Click);
             // 
@@ -215,28 +234,28 @@
             this.btnDeleteLayer.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteLayer.Image")));
             this.btnDeleteLayer.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDeleteLayer.Name = "btnDeleteLayer";
-            this.btnDeleteLayer.Size = new System.Drawing.Size(44, 44);
+            this.btnDeleteLayer.Size = new System.Drawing.Size(24, 25);
             this.btnDeleteLayer.Text = "toolStripButton1";
             this.btnDeleteLayer.Click += new System.EventHandler(this.btnDeleteLayer_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 47);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 28);
             // 
             // btnSaveImage
             // 
             this.btnSaveImage.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveImage.Image")));
             this.btnSaveImage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSaveImage.Name = "btnSaveImage";
-            this.btnSaveImage.Size = new System.Drawing.Size(142, 44);
+            this.btnSaveImage.Size = new System.Drawing.Size(122, 25);
             this.btnSaveImage.Text = "Export Image";
             this.btnSaveImage.Click += new System.EventHandler(this.btnSaveImage_Click);
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 75);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 56);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -248,7 +267,7 @@
             this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.splitContainer1.Panel2.Controls.Add(this.picLevelDesign);
-            this.splitContainer1.Size = new System.Drawing.Size(1010, 499);
+            this.splitContainer1.Size = new System.Drawing.Size(1010, 518);
             this.splitContainer1.SplitterDistance = 322;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -261,8 +280,9 @@
             this.toolNavigator.Location = new System.Drawing.Point(0, 0);
             this.toolNavigator.Name = "toolNavigator";
             this.toolNavigator.SelectedIndex = 0;
-            this.toolNavigator.Size = new System.Drawing.Size(322, 499);
+            this.toolNavigator.Size = new System.Drawing.Size(322, 518);
             this.toolNavigator.TabIndex = 0;
+            this.toolNavigator.SelectedIndexChanged += new System.EventHandler(this.toolNavigator_SelectedIndexChanged);
             // 
             // tabTileSet
             // 
@@ -270,7 +290,7 @@
             this.tabTileSet.Location = new System.Drawing.Point(4, 25);
             this.tabTileSet.Name = "tabTileSet";
             this.tabTileSet.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTileSet.Size = new System.Drawing.Size(314, 470);
+            this.tabTileSet.Size = new System.Drawing.Size(314, 489);
             this.tabTileSet.TabIndex = 0;
             this.tabTileSet.Text = "Tile Set";
             this.tabTileSet.UseVisualStyleBackColor = true;
@@ -289,7 +309,7 @@
             this.tlpTileset.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpTileset.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpTileset.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tlpTileset.Size = new System.Drawing.Size(308, 464);
+            this.tlpTileset.Size = new System.Drawing.Size(308, 483);
             this.tlpTileset.TabIndex = 0;
             // 
             // cboxTileSetSelect
@@ -310,7 +330,7 @@
             this.pnlTileSetScrollContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTileSetScrollContainer.Location = new System.Drawing.Point(3, 33);
             this.pnlTileSetScrollContainer.Name = "pnlTileSetScrollContainer";
-            this.pnlTileSetScrollContainer.Size = new System.Drawing.Size(302, 328);
+            this.pnlTileSetScrollContainer.Size = new System.Drawing.Size(302, 347);
             this.pnlTileSetScrollContainer.TabIndex = 1;
             // 
             // picTileSet
@@ -327,6 +347,42 @@
             this.picTileSet.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picTileSet_MouseMove);
             this.picTileSet.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picTileSet_MouseUp);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnEraser);
+            this.panel1.Controls.Add(this.btnPencil);
+            this.panel1.Controls.Add(this.picSelectedTile);
+            this.panel1.Location = new System.Drawing.Point(3, 386);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(302, 94);
+            this.panel1.TabIndex = 2;
+            // 
+            // btnEraser
+            // 
+            this.btnEraser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEraser.Image = ((System.Drawing.Image)(resources.GetObject("btnEraser.Image")));
+            this.btnEraser.Location = new System.Drawing.Point(231, 5);
+            this.btnEraser.Name = "btnEraser";
+            this.btnEraser.Size = new System.Drawing.Size(68, 86);
+            this.btnEraser.TabIndex = 4;
+            this.btnEraser.Text = "Eraser";
+            this.btnEraser.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnEraser.UseVisualStyleBackColor = true;
+            this.btnEraser.Click += new System.EventHandler(this.btnEraser_Click);
+            // 
+            // btnPencil
+            // 
+            this.btnPencil.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.btnPencil.Image = ((System.Drawing.Image)(resources.GetObject("btnPencil.Image")));
+            this.btnPencil.Location = new System.Drawing.Point(151, 5);
+            this.btnPencil.Name = "btnPencil";
+            this.btnPencil.Size = new System.Drawing.Size(74, 86);
+            this.btnPencil.TabIndex = 3;
+            this.btnPencil.Text = "Pencil";
+            this.btnPencil.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPencil.UseVisualStyleBackColor = false;
+            this.btnPencil.Click += new System.EventHandler(this.btnPencil_Click);
+            // 
             // picSelectedTile
             // 
             this.picSelectedTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -338,10 +394,11 @@
             // 
             // tabCollisionMap
             // 
+            this.tabCollisionMap.Controls.Add(this.picCollisionMap);
             this.tabCollisionMap.Location = new System.Drawing.Point(4, 25);
             this.tabCollisionMap.Name = "tabCollisionMap";
             this.tabCollisionMap.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCollisionMap.Size = new System.Drawing.Size(314, 470);
+            this.tabCollisionMap.Size = new System.Drawing.Size(314, 489);
             this.tabCollisionMap.TabIndex = 1;
             this.tabCollisionMap.Text = "Collision Map";
             this.tabCollisionMap.UseVisualStyleBackColor = true;
@@ -367,57 +424,17 @@
             this.picLevelDesign.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picLevelDesign_MouseClick);
             this.picLevelDesign.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picLevelDesign_MouseMove);
             // 
-            // panel1
+            // picCollisionMap
             // 
-            this.panel1.Controls.Add(this.btnEraser);
-            this.panel1.Controls.Add(this.btnPencil);
-            this.panel1.Controls.Add(this.picSelectedTile);
-            this.panel1.Location = new System.Drawing.Point(3, 367);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(302, 94);
-            this.panel1.TabIndex = 2;
-            // 
-            // btnPencil
-            // 
-            this.btnPencil.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.btnPencil.Image = ((System.Drawing.Image)(resources.GetObject("btnPencil.Image")));
-            this.btnPencil.Location = new System.Drawing.Point(151, 5);
-            this.btnPencil.Name = "btnPencil";
-            this.btnPencil.Size = new System.Drawing.Size(74, 86);
-            this.btnPencil.TabIndex = 3;
-            this.btnPencil.Text = "Pencil";
-            this.btnPencil.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnPencil.UseVisualStyleBackColor = false;
-            this.btnPencil.Click += new System.EventHandler(this.btnPencil_Click);
-            // 
-            // btnEraser
-            // 
-            this.btnEraser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEraser.Image = ((System.Drawing.Image)(resources.GetObject("btnEraser.Image")));
-            this.btnEraser.Location = new System.Drawing.Point(231, 5);
-            this.btnEraser.Name = "btnEraser";
-            this.btnEraser.Size = new System.Drawing.Size(68, 86);
-            this.btnEraser.TabIndex = 4;
-            this.btnEraser.Text = "Eraser";
-            this.btnEraser.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnEraser.UseVisualStyleBackColor = true;
-            this.btnEraser.Click += new System.EventHandler(this.btnEraser_Click);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.levelPropertiesToolStripMenuItem});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // levelPropertiesToolStripMenuItem
-            // 
-            this.levelPropertiesToolStripMenuItem.Enabled = false;
-            this.levelPropertiesToolStripMenuItem.Name = "levelPropertiesToolStripMenuItem";
-            this.levelPropertiesToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
-            this.levelPropertiesToolStripMenuItem.Text = "Level Properties";
-            this.levelPropertiesToolStripMenuItem.Click += new System.EventHandler(this.levelPropertiesToolStripMenuItem_Click);
+            this.picCollisionMap.Image = ((System.Drawing.Image)(resources.GetObject("picCollisionMap.Image")));
+            this.picCollisionMap.Location = new System.Drawing.Point(3, 3);
+            this.picCollisionMap.Name = "picCollisionMap";
+            this.picCollisionMap.Size = new System.Drawing.Size(32, 128);
+            this.picCollisionMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picCollisionMap.TabIndex = 0;
+            this.picCollisionMap.TabStop = false;
+            this.picCollisionMap.Paint += new System.Windows.Forms.PaintEventHandler(this.picCollisionMap_Paint);
+            this.picCollisionMap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picCollisionMap_MouseClick);
             // 
             // frmLevelEditor
             // 
@@ -445,9 +462,12 @@
             this.pnlTileSetScrollContainer.ResumeLayout(false);
             this.pnlTileSetScrollContainer.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTileSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picSelectedTile)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picLevelDesign)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectedTile)).EndInit();
+            this.tabCollisionMap.ResumeLayout(false);
+            this.tabCollisionMap.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLevelDesign)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCollisionMap)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -489,6 +509,7 @@
         private System.Windows.Forms.Button btnPencil;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem levelPropertiesToolStripMenuItem;
+        private System.Windows.Forms.PictureBox picCollisionMap;
     }
 }
 
